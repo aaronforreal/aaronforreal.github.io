@@ -50,7 +50,6 @@ body {
   padding: 5.625rem 0.625rem;
   text-align: center;
   color: var(--white-grey-color);
-  
   height: 25rem;
 }
   
@@ -61,7 +60,7 @@ body {
   letter-spacing: 0.063rem;
   margin-bottom: 1.25rem;
   text-align: left;
-  padding-left: 25%;
+  margin-left: 25%;
 }
   
 .introduction h1 span {
@@ -74,7 +73,7 @@ body {
   line-height: 2.25rem;
   margin-bottom: 1.875rem;
   max-width: 37.5rem;
-  padding-left: 25%;
+  margin-left: 25%;
   text-align: left;
   color: var(--grey-color);
 }
@@ -317,20 +316,16 @@ body {
     font-size: 2rem;
     line-height: 2.5rem;
     text-align: center;
-    padding-right: 5.625rem;
   }
 
   .introduction h1 span {
     font-size: 4rem;
     text-align: center;
-    padding-right: 5.625rem;
   }
 
   .introduction p {
     font-size: 1rem;
     line-height: 1.5rem;
-    text-align: center;
-    padding-right: 5.625rem;
   }
 
   .about-me h1, .portofolio h1 {
