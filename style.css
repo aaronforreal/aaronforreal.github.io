@@ -316,16 +316,19 @@ body {
     font-size: 2rem;
     line-height: 2.5rem;
     text-align: center;
+    padding-right: 25%;
   }
 
   .introduction h1 span {
     font-size: 4rem;
     text-align: center;
+    padding-right: 25%;
   }
 
   .introduction p {
     font-size: 1rem;
     line-height: 1.5rem;
+    padding-right: 25%;
   }
 
   .about-me h1, .portofolio h1 {
