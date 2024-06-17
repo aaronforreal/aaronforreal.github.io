@@ -44,7 +44,7 @@ body {
 }
   
 .introduction {
-  background-color: #000000;
+  background-color: var(--black-color);
   margin-top: 7%;
   font-size: var(--intro-font-size);
   padding: 5.625rem 0.625rem;
@@ -73,7 +73,7 @@ body {
   line-height: 2.25rem;
   margin-bottom: 1.875rem;
   max-width: 37.5rem;
-  margin-left: 25%;
+  padding-left: 25%;
   text-align: left;
   color: var(--grey-color);
 }
@@ -315,25 +315,28 @@ body {
   .introduction h1 {
     font-size: 2rem;
     line-height: 2.5rem;
-    padding-right: 25%;
+    text-align: center;
+    padding-right: 0;
   }
 
   .introduction h1 span {
     font-size: 4rem;
-    padding-right: 25%;
+    text-align: center;
+    padding-right: 0;
   }
 
   .introduction p {
     font-size: 1rem;
     line-height: 1.5rem;
-    padding-right: 25%;
+    text-align: center;
+    padding-right: 0;
   }
 
   .about-me h1, .portofolio h1 {
     font-size: 2.5rem;
     line-height: 2.75rem;
   }
-} 
+}
 
 /* Tablets (Medium devices) */
 @media only screen and (min-width: 601px) and (max-width: 768px) {
@@ -345,15 +348,18 @@ body {
   .introduction h1 {
     font-size: 2.5rem;
     line-height: 3rem;
+    text-align: center;
   }
 
   .introduction h1 span {
     font-size: 5rem;
+    text-align: center;
   }
 
   .introduction p {
     font-size: 1.25rem;
     line-height: 1.75rem;
+    text-align: center;
   }
 
   .about-me h1, .portofolio h1 {
