@@ -1,31 +1,40 @@
-# Aaron Sharma — Portfolio Website
+# Aaron’s Records — Portfolio Website
 
-Welcome to my personal portfolio.  
-This site showcases my projects, technical skills, and interests in web development, AI, cybersecurity, and UI/UX design.
+A record-shop themed personal portfolio for Aaron Sharma, hosted on GitHub Pages at [aaronforreal.github.io](https://aaronforreal.github.io).
 
 ## Overview
 
-A minimalist and responsive portfolio website built to highlight my work and experience.  
-It features sections on **About**, **Skills**, **Projects**, and **Contact**
+An interactive single-page portfolio styled as a vinyl record store. Projects are presented as records on a shelf, skills appear as cassette tapes you can slot into a tape deck, and the contact section doubles as a checkout counter with a printable receipt.
 
-## Tech Stack
+Features include night mode, synthesized shop sounds via Web Audio API, scroll-driven page-stacking animations, and drag interactions — all built with vanilla HTML, CSS, and JS. No frameworks, no build step, no dependencies beyond Google Fonts.
 
-**Frontend:** Next.js, React, Tailwind CSS, TypeScript  
-**Backend:** FastAPI, Flask (for project demos)  
-**Other Tools:** Figma, Git, LangChain, Python, Node.js
+## Sections
+
+- **The Drop** — hero with a spinnable vinyl disc
+- **The Gigs** — work experience timeline
+- **Fresh Pressings** — project shelf with cover art, descriptions, and links
+- **The Archive** — skills displayed as cassette tapes organized by genre, with an interactive tape deck
+- **Checkout** — contact info, on-hold list, and receipt generator
 
 ## Featured Projects
 
-**ExoDetect**  
-An AI-driven platform designed to detect and classify exoplanets using NASA’s Kepler mission data.  
+**Hookline** — Real-time phishing URL detection using Random Forest + BiLSTM. 4-model pipeline with behavioral feature analysis, FastAPI backend, and Streamlit dashboard.
 
-**Clinic Management System**  
-A Python and PyQt6 desktop application for efficient clinic operations and record management.  
+**ExoDetect** — Full-stack AI platform detecting and classifying exoplanets using NASA Kepler data. 11 ML models, interactive dashboards, FastAPI backend. NASA Award recipient.
 
-**RAG Q&A System**  
-A web application that enables intelligent PDF querying through LangChain and Groq’s LLM integration.
+**Clinic Management System** — Desktop clinic management app in Python + PyQt6. Clean MVC architecture, JSON storage, 80+ automated tests.
+
+**RAG Q&A System** — Real-time PDF querying web app. LangChain + Pinecone vector DB + Groq LLM, with Flask, Streamlit, and Tesseract OCR.
+
+## Skills
+
+**Languages:** Python, TypeScript, JavaScript, SQL, R, HTML/CSS  
+**Frontend:** React, Next.js, Tailwind, Plotly.js, Leaflet.js, Streamlit  
+**Backend:** FastAPI, Flask, Node.js, Docker, Google Cloud  
+**ML & Data:** Scikit-learn, XGBoost, LightGBM, UMAP, pandas, NumPy, LangChain, Hugging Face, Pinecone
 
 ## Contact
 
-Interested in collaborating or discussing technology?  
-Feel free to reach out at **aaronwnl4@gmail.com**
+**Email:** aaronwnl4@gmail.com  
+**GitHub:** [aaronforreal](https://github.com/aaronforreal)  
+**LinkedIn:** [aaron-sharma-cv](https://www.linkedin.com/in/aaron-sharma-cv/)
