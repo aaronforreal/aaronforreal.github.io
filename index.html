@@ -118,7 +118,7 @@ body.night{
 @media(max-width:768px){
   .hero{min-height:auto;flex-direction:column;justify-content:flex-start;align-items:center;padding-top:0}
   .hero-disc-wrap{position:relative;left:auto;top:auto;bottom:auto;
-    transform:none;
+    transform:translateY(var(--disc-ty,0px));
     width:85vw;height:85vw;margin:calc(50svh - 42.5vw) auto 2rem;z-index:1;flex-shrink:0}
 }
 .hero-disc{width:100%;height:100%;border-radius:50%;position:relative;touch-action:pan-y;
@@ -438,6 +438,7 @@ footer{border-top:var(--border);background:var(--ink);color:var(--cream);transit
   .crate-section{padding:3rem 4vw 3rem}
   .archive-section{padding:3rem 4vw 3rem}
   .page-card{min-height:auto}
+  .scene-hero{height:130vh}
 }
 
 /* ── small phones (≤480px) ── */
@@ -1024,8 +1025,8 @@ footer{border-top:var(--border);background:var(--ink);color:var(--cream);transit
 <footer>
   <div class="footer-marquee-wrap">
     <div class="footer-inner" aria-hidden="true">
-      <span>OPEN 24/7 ★ AARONFORREAL.GITHUB.IO ★ THANKS FOR DIGGING ★ AARON SHARMA ★ RECORDS &amp; CODE ★ 2026 ★</span>
-      <span>OPEN 24/7 ★ AARONFORREAL.GITHUB.IO ★ THANKS FOR DIGGING ★ AARON SHARMA ★ RECORDS &amp; CODE ★ 2026 ★</span>
+      <span>OPEN 24/7 ★ AARONSHARMA.WORK ★ THANKS FOR DIGGING ★ AARON SHARMA ★ RECORDS &amp; CODE ★ 2026 ★</span>
+      <span>OPEN 24/7 ★ AARONSHARMA.WORK ★ THANKS FOR DIGGING ★ AARON SHARMA ★ RECORDS &amp; CODE ★ 2026 ★</span>
     </div>
   </div>
 </footer>
@@ -1353,16 +1354,29 @@ function initScrollScenes() {
     if (sceneH <= 0) return;
     const raw = window.scrollY / sceneH;
 
-    // Vinyl drifts right: done by scroll 50% through hero scene
-    const vinylP = easeOut(clamp(raw / 0.55, 0, 1));
     const isMobile = window.innerWidth <= 768;
-    const maxTx = isMobile ? 0 : window.innerWidth * 0.24;
-    discWrap.style.setProperty('--disc-tx', (vinylP * maxTx) + 'px');
 
-    // Title + links fade in: starts at 30%, done at 70%
-    const titleP = easeOut(clamp((raw - 0.3) / 0.4, 0, 1));
-    heroType.style.opacity  = titleP;
-    heroType.style.transform = `translateY(${(1 - titleP) * 32}px)`;
+    if (isMobile) {
+      // Mobile: vinyl shifts up toward top, text rises into view below it
+      const liftP = easeOut(clamp(raw / 0.5, 0, 1));
+      const topMargin = (window.innerHeight * 0.5) - (window.innerWidth * 0.425);
+      const liftPx = liftP * topMargin * 0.85;
+      discWrap.style.setProperty('--disc-ty', (-liftPx) + 'px');
+
+      const titleP = easeOut(clamp((raw - 0.15) / 0.35, 0, 1));
+      heroType.style.opacity  = titleP;
+      heroType.style.transform = `translateY(${(-liftPx) + (1 - titleP) * 20}px)`;
+    } else {
+      // Desktop: vinyl drifts right
+      const vinylP = easeOut(clamp(raw / 0.55, 0, 1));
+      const maxTx = window.innerWidth * 0.24;
+      discWrap.style.setProperty('--disc-tx', (vinylP * maxTx) + 'px');
+      discWrap.style.setProperty('--disc-ty', '0px');
+
+      const titleP = easeOut(clamp((raw - 0.3) / 0.4, 0, 1));
+      heroType.style.opacity  = titleP;
+      heroType.style.transform = `translateY(${(1 - titleP) * 32}px)`;
+    }
   }
 
   window.addEventListener('scroll', update, { passive: true });
