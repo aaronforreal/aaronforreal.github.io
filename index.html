@@ -64,6 +64,33 @@ body.night{
   padding:.4rem .9rem;z-index:10001;text-decoration:none;font-family:var(--ff-mono);font-size:.8rem}
 .skip:focus{top:0}
 
+/*──────────── TAB BAR ────────────*/
+.tab-bar{position:fixed;top:1.2rem;left:1.2rem;z-index:9500;display:flex;gap:2px;
+  background:transparent;opacity:0;pointer-events:none;
+  transform:translateY(-6px);
+  transition:opacity .4s cubic-bezier(.4,0,.2,1),transform .4s cubic-bezier(.4,0,.2,1)}
+.tab-bar.visible{opacity:1;pointer-events:auto;transform:translateY(0)}
+.tab-bar a{font-family:var(--ff-mono);font-size:calc(var(--fs-label) - .05rem);letter-spacing:.08em;
+  text-transform:uppercase;color:var(--ink);text-decoration:none;
+  padding:.4rem .9rem;white-space:nowrap;position:relative;
+  background:rgba(17,17,17,.05);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  transition:color .2s,background .2s;min-height:36px;display:inline-flex;align-items:center}
+.tab-bar a:first-child{border-radius:4px 0 0 4px}
+.tab-bar a:last-child{border-radius:0 4px 4px 0}
+.tab-bar a::after{content:'';position:absolute;bottom:0;left:50%;width:0;height:1.5px;
+  background:var(--blue);transition:width .25s,left .25s;border-radius:1px}
+.tab-bar a:hover{color:var(--blue);background:rgba(17,17,17,.08)}
+.tab-bar a:hover::after{width:60%;left:20%}
+.tab-bar a.active{color:var(--blue);background:rgba(49,109,200,.1);font-weight:700}
+.tab-bar a.active::after{width:70%;left:15%}
+body.night .tab-bar a{color:var(--cream);background:rgba(236,231,219,.06)}
+body.night .tab-bar a:hover{color:var(--blue);background:rgba(236,231,219,.1)}
+body.night .tab-bar a.active{color:var(--blue);background:rgba(91,143,224,.12)}
+@media(max-width:600px){
+  .tab-bar{top:.8rem;left:.8rem;gap:1px}
+  .tab-bar a{font-size:calc(var(--fs-micro) - .02rem);padding:.35rem .5rem;min-height:32px}
+}
+
 /*──────────── FIXED UI ────────────*/
 .fixed-ui{position:fixed;top:1rem;right:1rem;z-index:9500;display:flex;gap:.5rem;flex-direction:row;align-items:center}
 .ui-btn{font-family:var(--ff-mono);font-size:var(--fs-label);padding:.45rem .8rem;background:var(--ink);color:var(--cream);
@@ -163,13 +190,12 @@ body.night{
   color:var(--ink);opacity:.65;margin-top:1.2rem}
 .hero-stickers{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.5rem}
 /* links */
-.hero-link{font-family:var(--ff-mono);font-size:var(--fs-label);padding:.45rem .8rem;
-  background:var(--orange);color:#fff;text-decoration:none;
-  letter-spacing:.06em;border:none;transition:background .15s,color .3s;white-space:nowrap;
-  display:inline-flex;align-items:center;min-height:44px;line-height:1.4}
-.hero-link:hover{background:var(--blue)}
-body.night .hero-link{background:var(--blue);color:#fff}
-body.night .hero-link:hover{background:var(--orange)}
+.hero-link{font-family:var(--ff-mono);font-size:var(--fs-label);padding:.4rem .8rem;
+  background:var(--orange);color:#fff;text-decoration:none;border:1.5px solid var(--orange);
+  cursor:pointer;letter-spacing:.05em;transition:background .15s,color .15s,border-color .15s;
+  display:inline-flex;align-items:center;gap:.4rem;min-height:40px;line-height:1.4;white-space:nowrap}
+.hero-link:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
+.hero-link svg{flex-shrink:0}
 
 /*══════════════════════════════════════════
   §2  THE GIGS — experience
@@ -228,10 +254,10 @@ body.night .hero-link:hover{background:var(--orange)}
   transition:background .3s,color .3s}
 .shelf-row-details{display:flex;flex-direction:column;gap:.3rem;justify-content:center}
 .shelf-info-cat{font-family:var(--ff-mono);font-size:var(--fs-label);color:var(--blue);letter-spacing:.1em;text-transform:uppercase}
-.shelf-info-title{font-family:var(--ff-syne);font-size:clamp(1rem,1.4vw,1.5rem);font-weight:800;color:var(--ink);line-height:1.1}
+.shelf-info-title{font-family:var(--ff-body);font-size:clamp(1rem,1.4vw,1.5rem);font-weight:500;color:var(--ink);line-height:1.2}
 .shelf-info-desc{font-family:var(--ff-body);font-size:clamp(.8rem,.9vw,.95rem);color:var(--ink);opacity:.85;line-height:1.55}
 .shelf-info-tags{display:flex;flex-wrap:wrap;gap:.25rem}
-.shelf-info-tag{font-family:var(--ff-mono);font-size:var(--fs-micro);padding:.12rem .4rem;border:1px solid var(--ink);opacity:.75}
+.shelf-info-tag{font-family:var(--ff-body);font-size:var(--fs-micro);padding:.12rem .4rem;border:1px solid var(--ink);opacity:.6}
 .shelf-info-actions{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.15rem}
 .sb-btn{font-family:var(--ff-mono);font-size:var(--fs-label);padding:.4rem .8rem;
   background:var(--ink);color:var(--cream);text-decoration:none;border:none;cursor:pointer;
@@ -512,6 +538,15 @@ footer{border-top:var(--border);background:var(--ink);color:var(--cream);transit
 <div class="toast" id="hold-toast" aria-live="polite"></div>
 <div class="vignette" aria-hidden="true"></div>
 
+<!-- tab bar -->
+<nav class="tab-bar" id="tab-bar" aria-label="Section navigation">
+  <a href="#top" class="active">The Drop</a>
+  <a href="#gigs">The Gigs</a>
+  <a href="#pressings">Pressings</a>
+  <a href="#archive">Archive</a>
+  <a href="#checkout">Checkout</a>
+</nav>
+
 <!-- fixed UI -->
 <div class="fixed-ui">
   <button class="ui-btn cart-btn" id="cart-btn" aria-label="View holds"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="margin-right:.35em"><path d="M7 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM7.16 6.84l.01.01L8.4 10h7.45c.75 0 1.41-.41 1.75-1.03l3.24-5.89L19.26 2H5.21l-.94-2H1v2h2l3.6 7.59-1.35 2.44C4.52 13.37 5.48 15 7 15h12v-2H7l1.1-2h7.45c.75 0 1.41-.41 1.75-1.03L20.7 4H6.31l-.87-1.8-.28.64z"/></svg><span id="cart-count">0</span></button>
@@ -542,8 +577,9 @@ footer{border-top:var(--border);background:var(--ink);color:var(--cream);transit
     <span class="hero-title-b" aria-label="RECORDS">RECORDS</span>
     <div class="hero-tagline">AI/ML · full-stack dev · data engineering · design · cybersecurity</div>
     <div class="hero-stickers">
-      <a class="hero-link" href="https://github.com/aaronforreal" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true" style="width:14px;height:14px;fill:currentColor;vertical-align:-.15em;margin-right:.3em;display:inline-block"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>github</a>
-      <a class="hero-link" href="https://www.linkedin.com/in/aaron-sharma-cv/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" style="width:14px;height:14px;fill:currentColor;vertical-align:-.15em;margin-right:.3em;display:inline-block"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>linkedin</a>
+      <a class="hero-link" href="mailto:aaronwnl4@gmail.com" target="_blank" rel="noopener" aria-label="Email me"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg> EMAIL ME ↗</a>
+      <a class="hero-link" href="https://github.com/aaronforreal" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg> GITHUB ↗</a>
+      <a class="hero-link" href="https://www.linkedin.com/in/aaron-sharma-cv/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LINKEDIN ↗</a>
     </div>
   </div>
 
@@ -952,7 +988,7 @@ footer{border-top:var(--border);background:var(--ink);color:var(--cream);transit
         <div class="deck-spool" id="deck-r"></div>
       </div>
       <div class="deck-display">
-        <div class="deck-lcd" id="deck-lcd">INSERT TAPE &gt;&gt;</div>
+        <div class="deck-lcd" id="deck-lcd">&#x2190; PICK A SKILL TO PLAY</div>
       </div>
     </div>
   </div>
@@ -1315,7 +1351,7 @@ function resetDeck() {
   deck.classList.remove('active');
   deck.style.removeProperty('border-color');
   deck.style.removeProperty('--deck-accent');
-  $('deck-lcd').textContent='INSERT TAPE >>'; $('deck-l').classList.remove('spinning'); $('deck-r').classList.remove('spinning');
+  $('deck-lcd').textContent='← PICK A SKILL TO PLAY'; $('deck-l').classList.remove('spinning'); $('deck-r').classList.remove('spinning');
 }
 
 // ═══ CHECKOUT ═══
@@ -1555,11 +1591,35 @@ function initCart() {
   cartBtn.addEventListener('click',()=>{
     if(holds.length){
       document.getElementById('checkout').scrollIntoView({behavior:'smooth'});
-      setTimeout(()=>{$('receipt-btn').click();},800);
+      setTimeout(()=>{
+        const c=$('receipt-container');
+        if(!c.classList.contains('open')) $('receipt-btn').click();
+      },800);
     } else {
       showToast('cart empty','put projects on hold first!');
     }
   });
+}
+
+// ═══ TAB BAR ═══
+function initTabBar() {
+  const bar = $('tab-bar');
+  const links = [...bar.querySelectorAll('a')];
+  const sections = links.map(a => document.querySelector(a.getAttribute('href')));
+  const heroType = document.querySelector('.hero-type');
+
+  function update() {
+    const typeOpacity = parseFloat(heroType.style.opacity || 0);
+    bar.classList.toggle('visible', typeOpacity > 0.1);
+
+    let active = sections[0];
+    for (const s of sections) {
+      if (s && s.getBoundingClientRect().top <= window.innerHeight * 0.4) active = s;
+    }
+    links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + active.id));
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  update();
 }
 
 // ═══ INIT ═══
@@ -1567,7 +1627,7 @@ function init() {
   renderShelf(); renderSkills(); renderHolds();
   initCheckout(); initCart();
   initScrollScenes(); initScrollSpin(); initPageTransitions(); initNight(); initKeys();
-  initScrollAnimations();
+  initScrollAnimations(); initTabBar();
   sizeScenes();
   window.addEventListener('resize', sizeScenes);
 }
